@@ -1,0 +1,51 @@
+portal:
+  baseUrl: https://example.com/portal
+  name: Application Portal
+  description: Comprehensive documentation for application portal
+
+auth:
+  strategy: state-file
+  stateFile: docgen-auth
+  loginUrl: https://example.com/portal
+  verifySelector: dashboard
+
+discovery:
+  startPaths:
+    - /portal
+  maxDepth: 3
+  maxPages: 50
+  includePatterns:
+    - "/portal/**"
+  excludePatterns:
+    - "**/*.pdf"
+    - "**/*.csv"
+    - "**/api/**"
+    - "**/logout**"
+  waitAfterNavigation: 3000
+
+capture:
+  screenshotFormat: png
+  screenshotQuality: 90
+  captureDir: .captures
+
+workflows: []
+
+generation:
+  model: claude-sonnet-4-5-20250929
+  maxTokens: 4096
+  temperature: 0.3
+  docTypes:
+    - tutorial
+    - reference
+  includeScreenshots: true
+  language: en
+
+output:
+  dir: output
+  formats:
+    - markdown
+    - html
+  screenshotDir: screenshots
+  generateToc: true
+  generateIndex: true
+  siteName: Application Documentation

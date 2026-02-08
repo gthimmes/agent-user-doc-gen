@@ -1,0 +1,19 @@
+# {{siteName}}
+
+> Generated on {{date generatedAt}}
+
+{{{content}}}
+
+---
+
+## Table of Contents
+
+{{#each toc}}
+{{#ifEquals type "index"}}{{else}}
+### {{title}}
+
+{{#each children}}
+- [{{title}}]({{slug}}.md)
+{{/each}}
+{{/ifEquals}}
+{{/each}}

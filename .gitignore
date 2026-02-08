@@ -1,0 +1,8 @@
+node_modules/
+dist/
+output/
+.captures/
+.env
+*.log
+.agent-browser-state/
+.browser-profile/

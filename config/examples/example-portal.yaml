@@ -1,0 +1,73 @@
+portal:
+  baseUrl: https://example.com/portal
+  name: Example Portal
+  description: Example configuration for portal documentation generation
+
+auth:
+  strategy: manual
+  loginUrl: https://example.com/portal
+  verifySelector: dashboard
+
+discovery:
+  startPaths:
+    - /portal
+  maxDepth: 3
+  maxPages: 100
+  includePatterns:
+    - "/portal/**"
+  excludePatterns:
+    - "**/*.pdf"
+    - "**/*.csv"
+    - "**/api/**"
+    - "**/logout**"
+  waitAfterNavigation: 2000
+
+capture:
+  screenshotFormat: png
+  screenshotQuality: 90
+  captureDir: .captures
+  sections:
+    - name: sidebar
+      selector: nav
+      description: Main navigation sidebar
+    - name: main-content
+      selector: main
+      description: Primary content area
+    - name: header
+      selector: header
+      description: Page header with breadcrumbs
+
+workflows:
+  - id: navigate-dashboard
+    name: View Dashboard
+    description: Navigate to and explore the main dashboard
+    startPath: /portal
+    steps:
+      - action: screenshot
+        description: Dashboard overview
+      - action: scroll
+        target: down
+        description: Scroll to see more dashboard content
+        waitAfter: 1000
+      - action: screenshot
+        description: Dashboard lower section
+
+generation:
+  model: claude-sonnet-4-5-20250929
+  maxTokens: 4096
+  temperature: 0.3
+  docTypes:
+    - tutorial
+    - reference
+  includeScreenshots: true
+  language: en
+
+output:
+  dir: output
+  formats:
+    - markdown
+    - html
+  screenshotDir: screenshots
+  generateToc: true
+  generateIndex: true
+  siteName: Example Portal Documentation

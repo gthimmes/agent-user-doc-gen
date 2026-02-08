@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{pageTitle}} - {{siteName}}</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="layout">
+    <nav class="sidebar">
+      <h2>{{siteName}}</h2>
+      {{#each toc}}
+      {{#ifEquals type "index"}}
+      <a href="index.html">{{title}}</a>
+      {{else}}
+      <h3>{{title}}</h3>
+      {{#each children}}
+      <a href="{{slug}}.html"{{#ifEquals slug ../activeSlug}} class="active"{{/ifEquals}}>{{title}}</a>
+      {{/each}}
+      {{/ifEquals}}
+      {{/each}}
+    </nav>
+    <main class="main">
+      {{{body}}}
+      <footer>
+        <p>Generated on {{date generatedAt}} with User Doc Gen</p>
+      </footer>
+    </main>
+  </div>
+</body>
+</html>
