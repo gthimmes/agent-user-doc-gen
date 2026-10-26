@@ -81,12 +81,12 @@ export const outputSchema = z.object({
 
 export const docGenConfigSchema = z.object({
   portal: portalSchema,
-  auth: authSchema.default({}),
-  discovery: discoverySchema.default({}),
-  capture: captureSchema.default({}),
+  auth: authSchema.prefault({}),
+  discovery: discoverySchema.prefault({}),
+  capture: captureSchema.prefault({}),
   workflows: z.array(workflowSchema).default([]),
-  generation: generationSchema.default({}),
-  output: outputSchema.default({}),
+  generation: generationSchema.prefault({}),
+  output: outputSchema.prefault({}),
 });
 
 export type ValidatedConfig = z.infer<typeof docGenConfigSchema>;
